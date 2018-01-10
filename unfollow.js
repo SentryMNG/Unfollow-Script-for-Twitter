@@ -1,3 +1,5 @@
+// Unfollow everyone on twitter.com, by Jamie Mason (https://twitter.com/fold_left)
+
 // 1. Go to https://twitter.com/following.
 // 2. Keep scrolling to the bottom repeatedly until all your followers are loaded.
 // 3. Run this in your console.
