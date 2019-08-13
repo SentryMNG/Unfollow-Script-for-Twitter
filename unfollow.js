@@ -7,31 +7,38 @@
 // 2. Open the Developer Console. (COMMAND+ALT+I on Mac)
 // 3. Paste this into the Developer Console and run it
 (() => {
-  const sleep = ({ seconds }) => new Promise(proceed => setTimeout(proceed, seconds * 1000));
+  const followButtonQuery = '[data-testid$="-unfollow"]';
+  const confirmButtonQuery = '[data-testid="confirmationSheetConfirm"]';
+  const sleep = ({ seconds }) =>
+    new Promise(proceed => {
+      console.log(`WAITING FOR ${seconds} SECONDS...`);
+      setTimeout(proceed, seconds * 1000);
+    });
 
   const nextBatch = async () => {
-    const followButtonQuery = '[data-testid$="-unfollow"]';
-    const confirmButtonQuery = '[data-testid="confirmationSheetConfirm"]';
     const followButtons = Array.from(document.querySelectorAll(followButtonQuery));
     const followButtonCount = followButtons.length;
 
-    if (followButtonCount > 0) {
-      console.log(`UNFOLLOWING ${followButtonCount} USERS...`);
-      await Promise.all(
-        followButtons.map(async followButton => {
-          followButton.click();
-          await sleep({ seconds: 1 });
-          const confirmBtn = document.querySelector(confirmButtonQuery);
-          confirmBtn.click();
-        })
-      );
-
-      console.log(`WAITING FOR 2 SECONDS...`);
-      await sleep({ seconds: 2 });
-      nextBatch();
-    } else {
-      console.log(`I THINK WE'RE DONE, RE-RUN THE SCRIPT IF ANY WERE MISSED`);
+    if (followButtonCount === 0) {
+      console.log(`NO ACCOUNTS FOUND, SO I THINK WE'RE DONE`);
+      console.log(`RELOAD PAGE AND RE-RUN SCRIPT IF ANY WERE MISSED`);
+      return;
     }
+
+    console.log(`UNFOLLOWING ${followButtonCount} USERS...`);
+
+    await Promise.all(
+      followButtons.map(async followButton => {
+        followButton.click();
+        await sleep({ seconds: 1 });
+        const confirmButton = document.querySelector(confirmButtonQuery);
+        confirmButton.click();
+      })
+    );
+
+    await sleep({ seconds: 2 });
+    nextBatch();
   };
+
   nextBatch();
 })();
