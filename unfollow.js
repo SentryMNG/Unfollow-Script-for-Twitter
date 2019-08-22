@@ -1,7 +1,5 @@
-// ====================
-// UPDATED 13 AUG 2019
-// ====================
 // Unfollow everyone on twitter.com, by Jamie Mason (https://twitter.com/fold_left)
+// https://gist.github.com/JamieMason/7580315
 //
 // 1. Go to https://twitter.com/YOUR_USER_NAME/following
 // 2. Open the Developer Console. (COMMAND+ALT+I on Mac)
@@ -16,6 +14,9 @@
     });
 
   const nextBatch = async () => {
+    window.scrollTo(0, document.body.scrollHeight);
+    await sleep({ seconds: 1 });
+
     const followButtons = Array.from(document.querySelectorAll(followButtonQuery));
     const followButtonCount = followButtons.length;
 
