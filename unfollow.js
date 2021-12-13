@@ -5,9 +5,6 @@
 // 2. Open the Developer Console. (COMMAND+ALT+I on Mac)
 // 3. Paste this into the Developer Console and run it
 //
-// See this tweet by @jacknotlittle for a video showing you how to do it;
-// https://twitter.com/jacknotlittle/status/1387471283525459969
-//
 // Last Updated: 09 April 2020
 (() => {
   const $followButtons = '[data-testid$="-unfollow"]';
