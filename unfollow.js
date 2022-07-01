@@ -1,11 +1,3 @@
-// Unfollow everyone on twitter.com, by Jamie Mason (https://twitter.com/fold_left)
-// https://gist.github.com/JamieMason/7580315
-//
-// 1. Go to https://twitter.com/YOUR_USER_NAME/following
-// 2. Open the Developer Console. (COMMAND+ALT+I on Mac)
-// 3. Paste this into the Developer Console and run it
-//
-// Last Updated: 09 April 2020
 (() => {
   const $followButtons = '[data-testid$="-unfollow"]';
   const $confirmButton = '[data-testid="confirmationSheetConfirm"]';
